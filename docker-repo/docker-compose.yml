@@ -1,0 +1,19 @@
+version: "3.8"
+services:
+    mongodb:
+        container_name: mongodb
+        build: 
+            context: mongodb/
+        volumes:
+        - ./data/mongodata:/data/mongodata 
+        ports:
+        - "27017:27017"
+        command: mongod
+
+
+networks: 
+    elk:
+        driver: bridge
+
+volumes: 
+    mongodata:
