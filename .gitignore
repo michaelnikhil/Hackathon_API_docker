@@ -54,3 +54,5 @@ media-api/media-api/obj/Debug/net5.0/staticwebassets/media-api.StaticWebAssets.M
 media-api/media-api/obj/Debug/net5.0/staticwebassets/media-api.StaticWebAssets.xml
 /DB-initializer/.vs/DB-initializer/v16
 /DB-initializer/DB-initializer/obj
+/DB-initializer/.vs/DB-initializer
+/DB-initializer/DB-initializer/bin/Debug/net5.0
