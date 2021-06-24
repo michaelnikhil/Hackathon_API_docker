@@ -38,7 +38,9 @@ namespace DB_initializer
         {
             services
                 .AddLogging(configure => configure.AddSerilog())
-                .AddTransient<IMongoDbContext, MongoDbContext>();
+                .AddTransient<IMongoDbContext, MongoDbContext>()
+                .AddTransient(typeof(ICollectionService<>), typeof(CollectionService<>));
+
             services
                  .Configure<MongoDbSettings>(Configuration.GetSection("MongoDb"));
         }

@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Swisscom.BusinessCenter.MessageCenter.Import.Database
+namespace DB_initializer.Database
 {
     public interface ICollectionService<T>
     {

@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DB_initializer.Database;
 
-namespace Swisscom.BusinessCenter.MessageCenter.Import.Database
+namespace DB_initializer.Database
 {
     public class CollectionService<T> : ICollectionService<T>
     {
