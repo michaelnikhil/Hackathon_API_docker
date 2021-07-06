@@ -4,6 +4,7 @@ namespace DB_initializer.Database
 {
     public interface  IMongoDbContext
     {
-        IMongoDatabase GetMongoDatabase();
+        IMongoDatabase Database {get;}
+        string CollectionName {get; set;}
     }
 }

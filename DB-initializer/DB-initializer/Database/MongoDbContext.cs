@@ -6,20 +6,19 @@ namespace DB_initializer.Database
 {
     public class MongoDbContext : IMongoDbContext
     {
-        private IMongoClient _mongoClient;
-        private readonly string _uri;
-        private readonly string _databaseName;
+        public IMongoDatabase Database {get;}
 
+        private readonly MongoDbSettings _settings;
         public MongoDbContext(IOptions<MongoDbSettings> mongoDbSettings)
         {
-            _uri = mongoDbSettings.Value.Uri;
-            _databaseName = mongoDbSettings.Value.DatabaseName;
+            _settings =  mongoDbSettings.Value;
+            var client = new MongoClient(_settings.ConnectionString);
+            Database = client.GetDatabase(_settings.DatabaseName);
         }
 
-        public IMongoDatabase GetMongoDatabase()
-        {
-            _mongoClient = _mongoClient ??= new MongoClient(_uri);
-            return _mongoClient.GetDatabase(_databaseName);
+        public string CollectionName {    
+            get { return _settings.CollectionName; }   
+            set { CollectionName = value; }  
         }
-    }
+    }    
 }

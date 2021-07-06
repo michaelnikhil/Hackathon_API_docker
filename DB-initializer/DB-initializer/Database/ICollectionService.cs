@@ -2,8 +2,8 @@ using System.Threading.Tasks;
 
 namespace DB_initializer.Database
 {
-    public interface ICollectionService<T>
+    public interface ICollectionService
     {
-        Task<bool> CreateCollection(string collectionName);
+        Task<bool> CreateCollection();
     }
 }

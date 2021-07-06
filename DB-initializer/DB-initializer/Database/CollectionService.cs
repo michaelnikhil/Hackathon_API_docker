@@ -1,20 +1,23 @@
-using System.Collections.Generic;
+
 using System.Threading.Tasks;
+using System;
 
 namespace DB_initializer.Database
 {
-    public class CollectionService<T> : ICollectionService<T>
+    public class CollectionService : ICollectionService
     {
         private readonly IMongoDbContext _context;
 
         public CollectionService(IMongoDbContext context)
         {
             _context = context;
+ 
         }
 
-        public async Task<bool> CreateCollection(string collectionName)
+        public async Task<bool> CreateCollection()
         {
-            await _context.GetMongoDatabase().CreateCollectionAsync(collectionName);
+            Console.WriteLine("*** create collection ***");
+            await _context.Database.CreateCollectionAsync(_context.CollectionName);
             return true;
         }
     }

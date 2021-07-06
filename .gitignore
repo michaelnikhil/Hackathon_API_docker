@@ -56,3 +56,8 @@ media-api/media-api/obj/Debug/net5.0/staticwebassets/media-api.StaticWebAssets.x
 /DB-initializer/DB-initializer/obj
 /DB-initializer/.vs/DB-initializer
 /DB-initializer/DB-initializer/bin/Debug/net5.0
+.vscode/launch.json
+.gitignore
+.gitignore
+.vscode/tasks.json
+media-api/media-api/obj/Debug/net5.0/project.razor.json
