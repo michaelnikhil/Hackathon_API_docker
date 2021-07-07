@@ -8,7 +8,7 @@ namespace DB_initializer.Model
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        Object Id { get; set; }
+        ObjectId Id { get; set; }
         string Label { get; set; }
         Uri Path {get; set;}
     }

@@ -59,6 +59,7 @@ namespace DB_initializer
             .Configure<MongoDbSettings>(options => Configuration.GetSection("MongoDbSettings").Bind(options))
             .AddTransient<IMongoDbContext,MongoDbContext>()
             .AddTransient(typeof(ICollectionService),typeof(CollectionService))
+            .AddTransient(typeof(IImportCsv),typeof(ImportCsv))
             .AddTransient<RunTasks>();
         }
 

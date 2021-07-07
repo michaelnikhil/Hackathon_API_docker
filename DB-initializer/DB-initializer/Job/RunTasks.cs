@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using System;
 
 namespace DB_initializer.Job
 {
@@ -16,8 +17,25 @@ namespace DB_initializer.Job
 
         public async Task Run()
         {
-            bool success = await _collectionService.CreateCollection();
+            try
+            {
+                bool success = 
+                await _collectionService.CreateCollection()
+                && await _collectionService.ImportItems();
 
+                if (success)
+                {
+                    Console.WriteLine("Run finished successfully");
+                }
+                else
+                {
+                    Console.WriteLine("Run not successful");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error running job : " + ex.Message);
+            } 
         }
 
     }

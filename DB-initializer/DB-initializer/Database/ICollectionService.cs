@@ -1,4 +1,6 @@
 using System.Threading.Tasks;
+using DB_initializer.Model;
+using System.Collections.Generic;
 
 namespace DB_initializer.Database
 {
@@ -7,6 +9,8 @@ namespace DB_initializer.Database
         Task<bool> CreateCollection();
 
         Task<bool> CollectionExists(string collectionName);
+
+        Task<bool> ImportItems();
         
     }
 }
