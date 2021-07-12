@@ -15,3 +15,4 @@ media-api/media-api/obj/
 media-api/.vscode/launch.json
 .gitignore
 media-api/.vscode/tasks.json
+/.vs/Hackathon_API_docker/v16/.suo
