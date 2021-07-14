@@ -21,22 +21,24 @@ namespace media_api.Controller
         public  ActionResult GetResult()
         {
             //var images = await _imageRepository.Get();
-            return Ok("Ok");
+            return Ok("test");
         }
 
         [HttpGet]
         [Route("catalog")]
         public async Task<ActionResult<IEnumerable<Image>>> Get()
         {
-            var images = await _imageRepository.Get();
+            string test = "test";
+            //var images = await _imageRepository.Get();
+            var images = _imageRepository.GetImage(); 
             return Ok();
         }
- 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Image>> Get(string id)
-        {
-            var image = await _imageRepository.Get(id);
-            return Ok(image);
-        }
+
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<Image>> Get(string id)
+        //{
+        //    var image = await _imageRepository.Get(id);
+        //    return Ok(image);
+        //}
     }
 }

@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using media_api.Database;
+using Microsoft.Extensions.Options;
 
 namespace media_api
 {
@@ -19,12 +20,29 @@ namespace media_api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddRazorPages();
-            services
-            .Configure<MongoDbSettings>(options => Configuration.GetSection("MongoDbSettings").Bind(options))
-            .AddTransient<IMongoDbContext,MongoDbContext>()
-            .AddScoped<IImageRepository,ImageRepository>();
+            ////services.AddRazorPages();
+            //services
+            //.Configure<ImageDBSettings>(options => Configuration.GetSection("MongoDbSettings").Bind(options))
+            //.AddTransient<IMongoDbContext,MongoDbContext>()
+            //.AddScoped<IImageRepository,ImageRepository>();
+            //
+
+            services.Configure<ImageDBSettings>(
+                Configuration.GetSection("MongoDbSettings"));
+
+            services.AddSingleton<IImageDBSettings>(sp =>
+                sp.GetRequiredService<IOptions<ImageDBSettings>>().Value);
+            services.AddScoped<IImageRepository, ImageRepository>();
             services.AddControllers();
+            // Add to enable CORS
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("https://localhost:51566");
+                                  });
+            });
 
         }
 

@@ -9,31 +9,57 @@ namespace media_api.Database
 {
     public class ImageRepository : IImageRepository
     {
-        public readonly IMongoDbContext _mongoContext;
         public IMongoCollection<Image> _dbCollection;
- 
-        public ImageRepository(IMongoDbContext context)
+        
+
+        public ImageRepository(IImageDBSettings settings)
         {
-            _mongoContext = context;
-            _dbCollection = _mongoContext.GetImageCollection();
+            var client = new MongoClient(settings.ConnectionString);
+            var database = client.GetDatabase(settings.DatabaseName);
+
+            _dbCollection = database.GetCollection<Image>(settings.CollectionName);
+
+            //_mongoContext = context;
+            //Collection = _mongoContext.GetMongoDatabase().GetCollection<Image>("Image-collection");
+            //_dbCollection = _mongoContext.GetImageCollection();
         }
+
+        //public IAsyncCursor<string> GetAllDatabases()
+        //{
+        //    var tmp = _mongoContext.Database.GetCollection<Image>("Image-collection").ToBsonDocument();
+        //    return _mongoContext.mongoClient.ListDatabaseNames();
+        //}
+
+
+
+        //public async Task<Image> Get(string id)
+        //{
+        //    //ex. 5dc1039a1521eaa36835e541
  
-        public async Task<Image> Get(string id)
-        {
-            //ex. 5dc1039a1521eaa36835e541
- 
-            var objectId = new ObjectId(id);
-            FilterDefinition<Image> filter = Builders<Image>.Filter.Eq("_id", objectId);
-            return await _dbCollection.FindAsync(filter).Result.FirstOrDefaultAsync();
- 
-        }
- 
+        //    var objectId = new ObjectId(id);
+        //    FilterDefinition<Image> filter = Builders<Image>.Filter.Eq("_id", objectId);
+        //    return await Collection.FindAsync(filter).Result.FirstOrDefaultAsync();
+
+        //}
  
         public async Task<IEnumerable<Image>> Get()
         {
-            var all = await _dbCollection.FindAsync(Builders<Image>.Filter.Empty);
-            return await all.ToListAsync();
+            {
+                try
+                {
+                    IFindFluent<Image, Image> entity = _dbCollection.Find(Builders<Image>.Filter.Empty);
+                    var tmp = await _dbCollection.Find(f => true).ToListAsync();
+                    return await entity.ToListAsync();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Failed to get collection :" + e.Message);
+                    return default;
+                }
+            }
         }
+
+        public List<Image> GetImage() => _dbCollection.Find(f => true).ToList();
 
         public async Task Create(Image obj)
        {
