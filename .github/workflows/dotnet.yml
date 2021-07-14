@@ -18,8 +18,11 @@ jobs:
       with:
         dotnet-version: 5.0.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore "media-api/media-api.csproj"
+      working-directory: ./media-api
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore "media-api/media-api.csproj"
+      working-directory: ./media-api
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal "media-api/media-api.Tests.csproj"
+      working-directory: ./media-api
