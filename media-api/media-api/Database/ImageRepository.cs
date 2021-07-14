@@ -11,7 +11,6 @@ namespace media_api.Database
 {
     public class ImageRepository : IImageRepository
     {
-        public IMongoCollection<Image> _dbCollection;
         private readonly IMongoDbContext _context;
         private readonly IMongoCollection<Image> Collection;
 
