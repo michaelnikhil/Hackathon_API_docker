@@ -24,5 +24,5 @@ jobs:
       run: dotnet build --no-restore "media-api/media-api.csproj"
       working-directory: ./media-api
     - name: Test
-      run: dotnet test --no-build --verbosity normal "media-api/media-api.Tests.csproj"
+      run: dotnet test --no-build --verbosity normal "media-api.Tests/media-api.Tests.csproj"
       working-directory: ./media-api
