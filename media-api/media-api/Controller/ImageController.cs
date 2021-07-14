@@ -37,10 +37,15 @@ namespace media_api.Controller
         }
 
         [HttpPost]
-        public async Task<ActionResult<Image>> Create([FromBody] Image image)
+        public async Task<ActionResult<Image>> InsertOne([FromBody] Image image)
         {
-            return Ok (await _imageRepository.Save(image));
+            return Ok (await _imageRepository.InsertOne(image));
         }
 
+        [HttpPost("many")]
+        public async Task<ActionResult<Image>> InsertMany([FromBody] IEnumerable<Image> images)
+        {
+            return Ok(await _imageRepository.InsertMany(images));
+        }
     }
 }

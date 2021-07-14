@@ -42,7 +42,7 @@ namespace media_api.Database
             }
         }
 
-        public async Task<string> Save(Image image)
+        public async Task<string> InsertOne(Image image)
         {
             try
             {
@@ -52,7 +52,22 @@ namespace media_api.Database
             }
             catch (MongoWriteException ex)
             {
-                Console.WriteLine("Failed to save element : \n" + ex.Message );
+                Console.WriteLine("Failed to insert image : \n" + ex.Message );
+                return ex.Message;
+            }
+        }
+
+        public async Task<string> InsertMany(IEnumerable<Image> images)
+        {
+            try
+            {
+                await Collection.InsertManyAsync(images);
+                return "Images added";
+
+            }
+            catch (MongoWriteException ex)
+            {
+                Console.WriteLine("Failed to insert images : \n" + ex.Message);
                 return ex.Message;
             }
         }
