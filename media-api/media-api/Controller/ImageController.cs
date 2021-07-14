@@ -35,5 +35,12 @@ namespace media_api.Controller
             var image = await _imageRepository.Get(filter);
             return Ok(image);
         }
+
+        [HttpPost]
+        public async Task<ActionResult<Image>> Create([FromBody] Image image)
+        {
+            return Ok (await _imageRepository.Save(image));
+        }
+
     }
 }
