@@ -19,12 +19,22 @@ namespace media_api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddRazorPages();
+
             services
-            .Configure<MongoDbSettings>(options => Configuration.GetSection("MongoDbSettings").Bind(options))
-            .AddTransient<IMongoDbContext,MongoDbContext>()
-            .AddScoped<IImageRepository,ImageRepository>();
+            .Configure<MongoDbSettings>(Configuration.GetSection("MongoDbSettings"))
+            .AddTransient<IMongoDbContext, MongoDbContext>()
+            .AddTransient(typeof(IImageRepository), typeof(ImageRepository));
+
             services.AddControllers();
+            // Add to enable CORS
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("https://localhost:51566");
+                                  });
+            });
 
         }
 

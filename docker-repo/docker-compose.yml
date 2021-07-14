@@ -5,10 +5,25 @@ services:
         build: 
             context: mongodb/
         volumes:
-        - ./data/mongodata:/data/mongodata 
+            - ./data/mongodata:/data/mongodata 
         ports:
         - "27017:27017"
         command: mongod
+        networks:
+        - elk
+    
+    mongo-express:
+        container_name: mongo_express
+        image: mongo-express
+        restart: always
+        ports:
+          - 8081:8081
+        depends_on:
+          - "mongodb"    
+        environment:
+        - ME_CONFIG_MONGODB_SERVER=mongodb          
+        networks:
+        - elk      
 
     media-api:
         container_name: media-api
@@ -18,6 +33,8 @@ services:
             - "../media-api/:/code/app"
         ports:
             - "51566:51566"
+        command: 
+            ["dotnet", "watch", "run"]
         depends_on:
             - "mongodb"
         environment:

@@ -1,12 +1,15 @@
 using System;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace media_api.Model
 {
-    public class Image : IImage
+    public class Image 
         {
-            public ObjectId Id { get; set; }
+            [BsonId]
+            [BsonRepresentation(BsonType.ObjectId)]
+            public string Id { get; set; }
             public string Label { get; set; }
-            public Uri Path {get; set;}
+            public string Path {get; set;}
         }
 }

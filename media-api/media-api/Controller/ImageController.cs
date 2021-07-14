@@ -3,6 +3,9 @@ using media_api.Database;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using media_api.Model;
+using MongoDB.Driver;
+using System;
+using System.Linq.Expressions;
 
 namespace media_api.Controller
 {
@@ -18,24 +21,18 @@ namespace media_api.Controller
         }
         
         [HttpGet]
-        public  ActionResult GetResult()
-        {
-            //var images = await _imageRepository.Get();
-            return Ok("Ok");
-        }
-
-        [HttpGet]
         [Route("catalog")]
         public async Task<ActionResult<IEnumerable<Image>>> Get()
         {
             var images = await _imageRepository.Get();
-            return Ok();
+            return Ok(images);
         }
- 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Image>> Get(string id)
+
+        [HttpGet("label/{label}")]
+        public async Task<ActionResult<Image>> Get(string label)
         {
-            var image = await _imageRepository.Get(id);
+            Expression<Func<Image, bool>> filter = x => x.Label == label ;
+            var image = await _imageRepository.Get(filter);
             return Ok(image);
         }
     }
