@@ -16,3 +16,7 @@ media-api/.vscode/launch.json
 .gitignore
 media-api/.vscode/tasks.json
 /.vs/Hackathon_API_docker/v16/.suo
+/media-api/.vs/media-api
+/media-api/media-api.Tests/bin/Debug/net5.0
+/media-api/media-api.Tests/obj/Debug/net5.0
+/media-api/media-api.Tests/obj
