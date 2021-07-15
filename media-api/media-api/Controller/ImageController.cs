@@ -3,7 +3,6 @@ using media_api.Database;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using media_api.Model;
-using MongoDB.Driver;
 using System;
 using System.Linq.Expressions;
 
