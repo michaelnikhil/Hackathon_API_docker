@@ -5,7 +5,6 @@ using MongoDB.Bson;
 using System;
 using media_api.Model;
 using System.Linq.Expressions;
-using Microsoft.AspNetCore.Mvc;
 
 namespace media_api.Database
 {
