@@ -1,13 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>media_api</RootNamespace>
     <UserSecretsId>34a1930f-d1b2-436b-851d-db493f4f4c92</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1"/>
-    <PackageReference Include="MongoDB.Bson" Version="2.13.0-beta1"/>
-    <PackageReference Include="MongoDB.Driver" Version="2.13.0-beta1"/>
+    <PackageReference Include="MongoDB.Bson" Version="2.13.0"/>
+    <PackageReference Include="MongoDB.Driver" Version="2.13.0"/>
+    <PackageReference Include="Microsoft.DotNet.Watcher.Tools" Version="2.0.2"/>
   </ItemGroup>
 </Project>
